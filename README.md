@@ -28,5 +28,19 @@ The client needs to be able to trust the remote VPN server is who he says he it 
 ## Handshake
 OpenSSL implements hybrid encryption. Asymmetric encryption via pre-shared certificates containing the public key and symmetric encryption during a session for all _real_ traffic for a combination of security and performance (throughput).
 
-# Sources
+
+# Controls in ISO 27002
+## A.13.2.1: Information transfer policies and procedures
+With:
+- Procedures to protect the data from manipulation, destroying...
+- Using cryptographic techniques **(AES)**
+
+## A.10.1.2: Key management
+With:
+- Generation of the keys **(Diffie-Hellman-KeyExchange)**
+- Distribution of keys including the usage
+
+## A.10 Cryptography in general
+
+# Source
 https://www.lynda.com/SSL-tutorials/Trust-encryption-network/178124/196828-4.html
