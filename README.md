@@ -23,6 +23,12 @@ A Virtual Private Network is established to allow the client access to restricte
 # Trust
 ## CA or PKI
 The client needs to be able to trust the remote VPN server is who he says he it is to establish an SSL/TLS connection
+for this reason pki is used.pki uses a public/private key pair to manage a secured communication which involves issuing and revoking certificates,creating and publishing CRLs,storing and retrieving certificates and CRLs and key life cycle management.Encryption yields confidentiality while digital signatures yields Integrity.
+Pki manages the keys and digital used to implement crytography within applications such as email and messaging,web browser and web servers ,Electronic data interchange; in applications that establish secure network transactions or communication sessions
+over the web or in vpn using protocols such as S/MIME,SSL and IPSEC; and in functions such as digitally signed documents or code In addition,application developed in-house can be pki-enabled.
+
+
+A Certified Authority is a body that issues certificates to persons or organisations. The CA signs the certificate thereby authenticating the identity of the requestor. In,Addition,the CA stamps the certificate with an expiration date.The CA may return the certificate to the requesting system and /or post it in a repository.
 
 # Encryption
 ## Authentication
