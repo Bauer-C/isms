@@ -24,16 +24,15 @@ A Virtual Private Network is established to allow the client access to restricte
 There exist a several VPN alternatives but mostly closed-source or proprietary. For some use-cases SSH may be used for the tunneling feature.
 
 # Trust
-The client needs to be able to trust the remote VPN server is who he says he it is to establish an SSL/TLS connection
-for this reason pki is used.pki uses a public/private key pair to manage a secured communication which involves issuing and revoking certificates,creating and publishing CRLs,storing and retrieving certificates and CRLs and key life cycle management.Encryption yields confidentiality while digital signatures yields Integrity.
-Pki manages the keys and digital used to implement crytography within applications such as email and messaging,web browser and web servers ,Electronic data interchange; in applications that establish secure network transactions or communication sessions
-over the web or in vpn using protocols such as S/MIME,SSL and IPSEC; and in functions such as digitally signed documents or code In addition,application developed in-house can be pki-enabled.
+The client needs to be able to trust the remote VPN server is who he says he it is to establish an SSL/TLS connection.
 
+## Public Key Infrastructure (PKI)
+For this reason PKI is used. PKI uses a public/private key pair to manage a secured communication which involves issuing and revoking certificates,creating and publishing CRLs,storing and retrieving certificates and CRLs and key life cycle management.Encryption yields confidentiality while digital signatures yields Integrity.
+PKI manages the keys and digital used to implement Cryptography within applications such as email and messaging,web browser and web servers ,Electronic data interchange; in applications that establish secure network transactions or communication sessions
+Over the web or in VPN using protocols such as S/MIME,SSL and IPSEC; and in functions such as digitally signed documents or code In addition,application developed in-house can be PKI-enabled.
 
+## Certificate Authority (CA)
 A Certified Authority is a body that issues certificates to persons or organisations. The CA signs the certificate thereby authenticating the identity of the requestor. In,Addition,the CA stamps the certificate with an expiration date.The CA may return the certificate to the requesting system and /or post it in a repository.
-
-## CA
-## PKI
 
 # Encryption
 ## Authentication
@@ -71,13 +70,15 @@ With:
 - Procedures to protect the data from manipulation, destroying...
 - Using cryptographic techniques **(AES)**
 
-## A.10.1.2: Key management
+## A10 Cryptography controls in 27K:
+Effectively use cryptographic tools
+
+### 10.1.1 Policy on the use of cryptographic controls
+
+### A.10.1.2: Key management
 With:
 - Generation of the keys **(Diffie-Hellman-KeyExchange)**
 - Distribution of keys including the usage
-
-## A.10 Cryptography in general
-
 
 # Source
 https://www.lynda.com/SSL-tutorials/Trust-encryption-network/178124/196828-4.html
