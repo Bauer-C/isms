@@ -44,7 +44,18 @@ For this reason a virtual private network can be used to _upgrade_ your public n
 A Virtual Private Network is established to allow the client access to restricted resources through a private _VPN tunnel_, securing the information send from and to the resource no matter the carrier network.
 
 # Alternatives
-There exist a several VPN alternatives but mostly closed-source or proprietary. For some use-cases SSH may be used for the tunneling feature.
+There exist several VPN alternatives, with most being closed-source or proprietary. For some use-cases *Remote Access* technologies like OpenSSH or Microsofts Remote Desktop Protocol (RDP) may suffice to access restricted resources like services or IT infrastructure.
+In particular Web Services can be tunneled through HTTPS (HTTP through TLS), E-Mail and messaging systems through STARTTLS, and remote access through TLS using RSA and DH similar to OpenVPN.
+VPN and in particular OpenVPN on the other hand offers a highly flexible tunneling solution.
+
+Advantages which may only be partially covered by alternatives for VPN are:
+- Transparent usage, any network traffic will be transported through the tunnel
+- The client appears to be inside the **secured internal network (Intranet)**
+- If setup correctly no traffic send out to the internet gets leaked, including DNS and even if VPN gets disconnected (*Kill Switch*)
+- **Mutual authentication** with each peer having its own certificate
+- Certificate and therefore access of a particular entity can be *revoked* without its involvement
+- Scalable, distributable, Congestion-proof and high stability through fast reconnects
+- **Perfect Forward Secrecy**
 
 # Trust
 The client needs to be able to trust the remote VPN server is who he says he it is to establish an SSL/TLS connection.
