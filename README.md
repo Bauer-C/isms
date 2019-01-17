@@ -1,6 +1,29 @@
 OpenVPN
 =======
 
+- [OpenVPN](#openvpn)
+- [Introduction](#introduction)
+- [Motivation](#motivation)
+  - [Information Security in Untrusted networks](#information-security-in-untrusted-networks)
+  - [Securing access to restricted resources](#securing-access-to-restricted-resources)
+- [Alternatives](#alternatives)
+- [Trust](#trust)
+  - [Public Key Infrastructure (PKI)](#public-key-infrastructure-pki)
+  - [Certificate Authority (CA)](#certificate-authority-ca)
+- [Encryption](#encryption)
+  - [Authentication](#authentication)
+    - [Password based login authentication](#password-based-login-authentication)
+    - [Static key](#static-key)
+    - [Public Key Cryptography via certificates](#public-key-cryptography-via-certificates)
+    - [Login via authentication server (LDAP)](#login-via-authentication-server-ldap)
+  - [Handshake](#handshake)
+  - [Traffic encryption](#traffic-encryption)
+- [Security Controls in ISO 27k documents](#security-controls-in-iso-27k-documents)
+  - [A10 Cryptography controls in 27K:](#a10-cryptography-controls-in-27k)
+    - [10.1.1 Policy on the use of cryptographic controls](#1011-policy-on-the-use-of-cryptographic-controls)
+    - [A.10.1.2: Key management](#a1012-key-management)
+- [Source](#source)
+
 # Introduction
 
 OpenVPN establishes a Virtual Private Network to secure communication over an untrusted supporting network. It implements a custom protocol on-top of the transport network layer to encrypt the traffic point-to-point, different from IPsec, and uses the cryptographic protocol **TLS** for key exchange to ensure the integrity and confidentiality of the communication via the **OpenSSL** encryption library. Members off the VPN authenticate each other using pre-shared cryptographic certificates or alternatively shared credentials (*username* and *password*). Latter case won’t be further considered in this document.
@@ -51,24 +74,30 @@ A pre-shared static key for point-to-point encryption is used. The VPN Server kn
 Theft of media containing key, Insecure sharing of key
 
 ### Public Key Cryptography via certificates
-A perfect forward security is established using pre-shared certificates signed by a common trusted CA.
-THe VPN Server doesn't need to have or know of all the client certificates which may connect to it.
+A perfect forward security is established using pre-shared certificates signed by a commonly trusted CA.
+The VPN Server doesn't need to have or know of all the client certificates which may connect to it.
 If the current session key is compromised due to an attack only the current session can be decrypted, not past sessions which may have been recorded
 
 **Attack**
 DMA devices, Cold-boot attack, kernel exploit
 
-## Traffic encryption
+### Login via authentication server (LDAP)
+
 ## Handshake
 OpenSSL implements hybrid encryption. Asymmetric encryption via pre-shared certificates containing the public key and symmetric encryption during a session for all _real_ traffic for a combination of security and performance (throughput).
 
+## Traffic encryption
 
+# Security Controls in ISO 27k documents
+From ISO 27002 Appendix
 
-# Controls in ISO 27002
-## A.13.2.1: Information transfer policies and procedures
-With:
-- Procedures to protect the data from manipulation, destroying...
-- Using cryptographic techniques **(AES)**
+A 9 Business requirements of access control
+To limit access to information and information processing facilities
+
+**13.2.1: Information transfer policies and procedures**
+Objective: To maintain the security of information transferred within an organization and with any external entity
+
+**9.1.2 Access to networks and network services**
 
 ## A10 Cryptography controls in 27K:
 Effectively use cryptographic tools
@@ -82,3 +111,4 @@ With:
 
 # Source
 https://www.lynda.com/SSL-tutorials/Trust-encryption-network/178124/196828-4.html
+https://www.cisco.com/c/en/us/products/security/vpn-endpoint-security-clients/what-is-vpn.html
