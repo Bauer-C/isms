@@ -1,0 +1,7 @@
+https://openvpn.net/community-resources/how-to/#quick
+
+From: Public Key Infrastructure (PKI)
+to manage a secured communication which involves issuing and revoking certificates
+Encryption yields confidentiality while digital signatures yields Integrity.
+PKI manages the keys and digital used to implement Cryptography within applications such as email and messaging,web browser and web servers ,Electronic data interchange; in applications that establish secure network transactions or communication sessions
+Over the web or in VPN using protocols such as S/MIME,SSL and IPSEC; and in functions such as digitally signed documents or code In addition,application developed in-house can be PKI-enabled.

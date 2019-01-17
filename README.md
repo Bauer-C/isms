@@ -61,9 +61,8 @@ Advantages which may only be partially covered by alternatives for VPN are:
 The client needs to be able to trust the remote VPN server is who he says he it is to establish an SSL/TLS connection.
 
 ## Public Key Infrastructure (PKI)
-For this reason PKI is used. PKI uses a public/private key pair to manage a secured communication which involves issuing and revoking certificates,creating and publishing CRLs,storing and retrieving certificates and CRLs and key life cycle management.Encryption yields confidentiality while digital signatures yields Integrity.
-PKI manages the keys and digital used to implement Cryptography within applications such as email and messaging,web browser and web servers ,Electronic data interchange; in applications that establish secure network transactions or communication sessions
-Over the web or in VPN using protocols such as S/MIME,SSL and IPSEC; and in functions such as digitally signed documents or code In addition,application developed in-house can be PKI-enabled.
+For this reason a PKI is used. PKI takes advantage of *public-key cryptography* using **certificates** for each entity and corresponding **private keys** which never leaves the entities control i.e. only stored on the device it was generated on.
+The *framework* allows for creating creating the unsigned certificate, keys, signing request (CSR) and for the CA entity creating and publishing CRLs, importing, signing certificates and CRLs and key life cycle management.
 
 ## Certificate Authority (CA)
 A Certified Authority is a body that issues certificates to persons or organizations. The CA signs the certificate thereby authenticating the identity of the requestor. In,Addition,the CA stamps the certificate with an expiration date.The CA may return the certificate to the requesting system and /or post it in a repository.
