@@ -45,9 +45,9 @@ A Virtual Private Network is established to allow the client access to restricte
 
 # Alternatives
 There exist several VPN alternatives, with most being closed-source or proprietary. For some use-cases *Remote Access* technologies like OpenSSH or Microsofts Remote Desktop Protocol (RDP) may suffice to access restricted resources like services or IT infrastructure.
-In particular Web Services can be tunneled through HTTPS (HTTP through TLS), E-Mail and messaging systems through STARTTLS, and remote access through TLS using RSA and DH similar to OpenVPN.
-VPN and in particular OpenVPN on the other hand offers a highly flexible tunneling solution.
+In particular Web Services can be tunneled through HTTPS (HTTP through TLS), E-Mail and messaging systems through *STARTTLS* and *S/MIME*, and remote access through TLS using *RSA* and *DH* algorithms similar to OpenVPN.
 
+VPN and in particular OpenVPN on the other hand offers a highly flexible tunneling solution.
 Advantages which may only be partially covered by alternatives for VPN are:
 - Transparent usage, any network traffic will be transported through the tunnel
 - The client appears to be inside the **secured internal network (Intranet)**
