@@ -9,3 +9,5 @@ Over the web or in VPN using protocols such as S/MIME,SSL and IPSEC; and in func
 A simple enrollment utility is Easy-RSA 2.0 which is part of OpenVPN 2.1                                                        
 series
 https://openvpn.net/community-resources/how-to/#pkcs11_determine_provide
+
+The CA certificate is dsitributed with the OpenVPN configuration file to the client
