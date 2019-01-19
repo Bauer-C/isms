@@ -60,11 +60,13 @@ Advantages which may only be partially covered by alternatives for VPN are:
 # Trust
 The client needs to be able to trust the remote VPN server "is who he says he is" to establish a secure SSL/TLS connection.
 In the case of typical HTTPS connections for web servers trust is established via a *chain of trust* starting with the manufactur installed root certificates over intermediate certificates until the web servers certificate with each corresponding entity giving trust to the one entity next in the chain.
-![Chain of Trust](https://en.wikipedia.org/wiki/Chain_of_trust#/media/File:Chain_of_trust.svg)
+
+![Chain of Trust](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Chain_of_trust.svg/640px-Chain_of_trust.svg.png)
+
 See also [Chain of trust - Wikipedia](https://en.wikipedia.org/wiki/Chain_of_trust)
 
-In the case of OpenVPN trust is established by one Certificate Authority (CA) which *gives* trust to all the legitimate peers in the VPN network by signing their certificate.
-A signed certificate from a remote peer by the CA which is locally trusted proves the remote peer is trusted as well since the signature is only given by the CA after validing the certificate ownership.
+In the case of **OpenVPN** trust is established by one Certificate Authority (CA) which *gives* trust to all the legitimate peers in the VPN network by signing their certificate.
+A signed certificate from a remote peer by the CA which is **locally trusted** proves the remote peer is trusted as well since the signature is only given by the CA after validing the certificate ownership.
 
 ## Public Key Infrastructure (PKI)
 For this reason a PKI is used. PKI takes advantage of *public-key cryptography* using **certificates** for each entity and corresponding **private keys** which never leaves the entities control i.e. only stored on the device it was generated on.
