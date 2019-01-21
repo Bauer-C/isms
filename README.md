@@ -11,7 +11,7 @@ OpenVPN
   - [Public Key Infrastructure (PKI)](#public-key-infrastructure-pki)
   - [Certificate Authority (CA)](#certificate-authority-ca)
 - [Encryption and authentication methods](#encryption-and-authentication-methods)
-  - [Password based authentication](#password-based-authentication)
+  - [Password-only authentication](#password-only-authentication)
   - [Symmetric encryption using static keys](#symmetric-encryption-using-static-keys)
   - [Hybrid encryption using public-Key cryptography via certificates](#hybrid-encryption-using-public-key-cryptography-via-certificates)
   - [OpenVPN Protocol to establish and communicate through the VPN tunnel](#openvpn-protocol-to-establish-and-communicate-through-the-vpn-tunnel)
@@ -74,12 +74,21 @@ A Certified Authority is a body that issues certificates to persons or organizat
 
 # Encryption and authentication methods
 OpenVPN supports several encryption and authentication methods allowing the client to prove to the server _"he is who he says he is"_ to establish a **secure and trusted VPN tunnel**.
+See also [OpenVPN's documents](https://openvpn.net/community-resources/how-to/#auth).
 
-## Password based authentication
-The client authenticates using using a user and password combination to send to the VPN Server. No advanced security like trust established.
+## Password-only authentication
+The client authenticates using a user and password combination to send to the VPN Server over a secure TLS channel for authentication. The server is still required to provide a certificate upon connection to be able to establish a secure TLS connection.
+The use of a CA certificate to establish trust of the remote and providing a client certificate to the certificate to prove identity is **optional** if using the *auth-user-pass* directive.
+The username and password is passed to an authentication plugin to verify validity and either allow or block authentication.
+**Security** using this method is comparable to an OpenSSH server with authentication via a username and password, verifying the remotes identity is optional but after the first connection its *fingerprint* is remembered and stored.
 
 **Advantages/Disadvantages**
-- Insecure sharing of key
+- 
+| Advantages           | Disadvantages                                     |
+| -------------------- | ------------------------------------------------- |
+| + Easy setup & Usage | - Compromise of authentication method more likely |
+|                      | - Loss of authentication method likely            |
+|                      | - No VPN Server verification                      |
 
 ## Symmetric encryption using static keys
 A pre-shared static key for point-to-point encryption is used. The VPN Server knows of the possible clients and if the key is compromised, all traffic including past recorded traffic can be decrypted.
