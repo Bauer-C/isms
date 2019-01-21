@@ -1,7 +1,6 @@
-OpenVPN
-=======
+OpenVPN Cryptography
+====================
 
-- [OpenVPN](#openvpn)
 - [Introduction](#introduction)
 - [Motivation](#motivation)
   - [Information Security in Untrusted networks](#information-security-in-untrusted-networks)
