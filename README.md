@@ -1,6 +1,7 @@
 OpenVPN Cryptography
 ====================
 
+- [OpenVPN Cryptography](#openvpn-cryptography)
 - [Introduction](#introduction)
 - [Motivation](#motivation)
   - [Information Security in Untrusted networks](#information-security-in-untrusted-networks)
@@ -9,11 +10,11 @@ OpenVPN Cryptography
 - [Trust](#trust)
   - [Public Key Infrastructure (PKI)](#public-key-infrastructure-pki)
   - [Certificate Authority (CA)](#certificate-authority-ca)
+  - [Easy-RSA, PKI toolchain for OpenVPN](#easy-rsa-pki-toolchain-for-openvpn)
 - [Encryption and authentication methods](#encryption-and-authentication-methods)
   - [Password-only authentication](#password-only-authentication)
   - [Symmetric encryption using static keys](#symmetric-encryption-using-static-keys)
   - [Hybrid encryption using public-Key cryptography via certificates](#hybrid-encryption-using-public-key-cryptography-via-certificates)
-  - [OpenVPN Protocol to establish and communicate through the VPN tunnel](#openvpn-protocol-to-establish-and-communicate-through-the-vpn-tunnel)
 - [Security Controls in ISO 27k documents](#security-controls-in-iso-27k-documents)
   - [A10 Cryptography controls in 27K:](#a10-cryptography-controls-in-27k)
     - [10.1.1 Policy on the use of cryptographic controls](#1011-policy-on-the-use-of-cryptographic-controls)
@@ -72,6 +73,35 @@ This *framework* allows users t to create the unsigned certificate, correspondin
 ## Certificate Authority (CA)
 A Certified Authority is a body that issues certificates to entities after verifying their identity (correct ownership of the certificate). The CA then signs the certificate thereby authenticating the identity of the requestor. In Addition the CA *stamps* the certificate with an expiration date. The CA may return the certificate to the requesting system and/or post it in a repository.
 The CA entity on uses the PKI tools to create its self-signed certificate for destribution and manages the members (clients and server) certificates life-cycle by signing and revoking them if needed using *Certificate Revokation Lists* (CRLs).
+
+## Easy-RSA, PKI toolchain for OpenVPN
+> A simple enrollment utility is Easy-RSA 2.0 which is part of OpenVPN 2.1 series
+
+From [OpenVPN docs](https://openvpn.net/community-resources/how-to/#pkcs11_determine_provide)
+
+Easy-RSA provides **tools and commands** to use and maintain a *Public Key Infrastructure* and is included in a typical OpenVPN installation.
+This allows each entity to generate their own corresponding **Public and Private key** and a **Certificate Signing Request** which has to be send to the CA, ownership of the key pair validated, e.g. by using a secure channel, and finally signed by the CA and send back.
+The CA on the other hand uses the Easy-RSA *toolchain* additionally, to typical key pair generation and self-signing, to sign the other entities certificates and manage their life-time.
+Certificates may be invalidated either by **expiring** depending on the expiration date written into the certificate by the CA and by **revoking** the certificate using CRLs.
+
+**Example commands for clients/server:**
+```bash
+# Required to initialize PKI locally:
+$ easyrsa init-pki 
+# Generate a keypair and certificate request in PKCS#10 format:
+$ easyrsa gen-req nameOfRequest
+```
+
+**Example commands specific to CA:**
+```bash
+# Generate CA entity (selg-signed certificate for signing):
+$ easyrsa build-ca
+# Import CSR for review and signing
+$ easyrsa import-req /path/to/request.req nameOfRequest
+# Sign certificate with default options
+#  like expiration date 10 years after signing
+$ easyrsa sign-req client NAME
+```
 
 # Encryption and authentication methods
 OpenVPN supports several encryption and authentication methods allowing the client to prove to the server _"he is who he says he is"_ to establish a **secure and trusted VPN tunnel**.
