@@ -90,21 +90,27 @@ The username and password is passed to an authentication plugin to verify validi
 |                      | - No VPN Server verification                      |
 
 ## Symmetric encryption using static keys
-A pre-shared static key for point-to-point encryption is used. The VPN Server knows of the possible clients and if the key is compromised, all traffic including past recorded traffic can be decrypted.
+With OpenVPN version 1.X (first version) OpenVPN used to use point-to-point connection and static keys.
+These keys have to be shared via a secure channel because if compromised all data send through the VPN tunnel could be decrypted by a 3rd party who gained access to the key, including past sessions which used the same key.
+The VPN Server is setup specifically to allowed a known client.
 
-**Advantages/Disadvantages**
-Theft of media containing key, Insecure sharing of key
+| Advantages           | Disadvantages                                          |
+| -------------------- | ------------------------------------------------------ |
+| + Easy Usage         | - Requires secure channel to share key securely        |
+|                      | - No perfect secrecy -> past sessions can be decrypted |
+|                      | - No VPN Server or client verification                 |
 
 ## Hybrid encryption using public-Key cryptography via certificates
-A perfect forward security is established using pre-shared certificates signed by a commonly trusted CA.
-The VPN Server doesn't need to have or know of all the client certificates which may connect to it.
+A **perfect forward security** is established by combining signed certificates to establish trust and variable session keys. The session key supporting symmetric traffic encryption is used for the life-time of a session, always unique to the session and never stored which makes it harder to compromise compared to static-key encryption. It is *negotiated* via the *DH* key exchangefrom from two generated keys, one from each party and send to the other party in encrypted form using its public key, and then *combined* into the symmetric key which is the same for both parties and far more efficient to encrypt and decrypt the packets.
+This method combines public-key cryptography with symmetric encryption and is therefore called hybrid encryption with the advantages of both.
+The VPN Server doesn't need to have or know of all the clients certificates which may connect to it.
 If the current session key is compromised due to an attack only the current session can be decrypted, not past sessions which may have been recorded
 
-**Advantages/Disadvantages**
-DMA devices, Cold-boot attack, kernel exploit
-
-## OpenVPN Protocol to establish and communicate through the VPN tunnel
-OpenSSL implements hybrid encryption. Asymmetric encryption via pre-shared certificates containing the public key and symmetric encryption during a session for all _real_ traffic for a combination of security and performance (throughput).
+| Advantages                           | Disadvantages                          |
+| ------------------------------------ | -------------------------------------- |
+| + Trust established                  | - More involved to setup and maintain  |
+| + Perfect-Forward-Secrecy            | - Certificates expire                  |
+| + Central access managenent using CA |                                        |
 
 # Security Controls in ISO 27k documents
 From ISO 27002 Appendix
@@ -113,7 +119,7 @@ A 9 Business requirements of access control
 To limit access to information and information processing facilities
 
 **13.2.1: Information transfer policies and procedures**
-Objective: To maintain the security of information transferred within an organization and with any external entity
+Objective: To maintain the security of information transferred within an organization and with any external entity      
 
 **9.1.2 Access to networks and network services**
 
