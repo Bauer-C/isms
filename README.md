@@ -77,7 +77,7 @@ This *framework* allows users t to create the unsigned certificate, correspondin
 - VPN Server and Client(s) each have their own certificate signed by the CA
 - Upon connection the peers certificate is exchanged and validated by the other party against the CA's certificate
   
-![certificate signing](resources/Trust.png)****
+![certificate signing](resources/Trust.png)
 
 ## Certificate Authority (CA)
 A Certified Authority is a body that issues certificates to entities after verifying their identity (correct ownership of the certificate). The CA then signs the certificate thereby authenticating the identity of the requestor. In Addition the CA *stamps* the certificate with an expiration date. The CA may return the certificate to the requesting system and/or post it in a repository.
@@ -130,7 +130,7 @@ The username and password is passed to an authentication plugin to verify validi
 **Security** using this method is comparable to an OpenSSH server with authentication via a username and password, verifying the remotes identity is optional but after the first connection its *fingerprint* is remembered and stored.
 
 **Advantages/Disadvantages**
-- 
+
 | Advantages           | Disadvantages                                     |
 | -------------------- | ------------------------------------------------- |
 | + Easy setup & Usage | - Compromise of authentication method more likely |
