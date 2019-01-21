@@ -10,14 +10,11 @@ OpenVPN
 - [Trust](#trust)
   - [Public Key Infrastructure (PKI)](#public-key-infrastructure-pki)
   - [Certificate Authority (CA)](#certificate-authority-ca)
-- [Encryption](#encryption)
-  - [Authentication](#authentication)
-    - [Password based login authentication](#password-based-login-authentication)
-    - [Static key](#static-key)
-    - [Public Key Cryptography via certificates](#public-key-cryptography-via-certificates)
-    - [Login via authentication server (LDAP)](#login-via-authentication-server-ldap)
-  - [Handshake](#handshake)
-  - [Traffic encryption](#traffic-encryption)
+- [Encryption and authentication methods](#encryption-and-authentication-methods)
+  - [Password based authentication](#password-based-authentication)
+  - [Symmetric encryption using static keys](#symmetric-encryption-using-static-keys)
+  - [Hybrid encryption using public-Key cryptography via certificates](#hybrid-encryption-using-public-key-cryptography-via-certificates)
+  - [OpenVPN Protocol to establish and communicate through the VPN tunnel](#openvpn-protocol-to-establish-and-communicate-through-the-vpn-tunnel)
 - [Security Controls in ISO 27k documents](#security-controls-in-iso-27k-documents)
   - [A10 Cryptography controls in 27K:](#a10-cryptography-controls-in-27k)
     - [10.1.1 Policy on the use of cryptographic controls](#1011-policy-on-the-use-of-cryptographic-controls)
@@ -75,36 +72,31 @@ The *framework* allows for creating creating the unsigned certificate, keys, sig
 ## Certificate Authority (CA)
 A Certified Authority is a body that issues certificates to persons or organizations. The CA signs the certificate thereby authenticating the identity of the requestor. In,Addition,the CA stamps the certificate with an expiration date.The CA may return the certificate to the requesting system and /or post it in a repository.
 
-# Encryption
-## Authentication
-OpenVPN supports multiple authentication methods allowing the client to proof to the server _he says who he is_
+# Encryption and authentication methods
+OpenVPN supports several encryption and authentication methods allowing the client to prove to the server _"he is who he says he is"_ to establish a **secure and trusted VPN tunnel**.
 
-### Password based login authentication
+## Password based authentication
 The client authenticates using using a user and password combination to send to the VPN Server. No advanced security like trust established.
 
-**Attack**
-Insecure sharing of key
+**Advantages/Disadvantages**
+- Insecure sharing of key
 
-### Static key
+## Symmetric encryption using static keys
 A pre-shared static key for point-to-point encryption is used. The VPN Server knows of the possible clients and if the key is compromised, all traffic including past recorded traffic can be decrypted.
 
-**Attack**
+**Advantages/Disadvantages**
 Theft of media containing key, Insecure sharing of key
 
-### Public Key Cryptography via certificates
+## Hybrid encryption using public-Key cryptography via certificates
 A perfect forward security is established using pre-shared certificates signed by a commonly trusted CA.
 The VPN Server doesn't need to have or know of all the client certificates which may connect to it.
 If the current session key is compromised due to an attack only the current session can be decrypted, not past sessions which may have been recorded
 
-**Attack**
+**Advantages/Disadvantages**
 DMA devices, Cold-boot attack, kernel exploit
 
-### Login via authentication server (LDAP)
-
-## Handshake
+## OpenVPN Protocol to establish and communicate through the VPN tunnel
 OpenSSL implements hybrid encryption. Asymmetric encryption via pre-shared certificates containing the public key and symmetric encryption during a session for all _real_ traffic for a combination of security and performance (throughput).
-
-## Traffic encryption
 
 # Security Controls in ISO 27k documents
 From ISO 27002 Appendix
