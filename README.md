@@ -65,11 +65,13 @@ In the case of **OpenVPN** trust is established by one Certificate Authority (CA
 A signed certificate from a remote peer by the CA which is **locally trusted** proves the remote peer is trusted as well since the signature is only given by the CA after validing the certificate ownership.
 
 ## Public Key Infrastructure (PKI)
-For this reason a PKI is used. PKI takes advantage of *public-key cryptography* using **certificates** for each entity and corresponding **private keys** which never leaves the entities control i.e. only stored on the device it was generated on.
-The *framework* allows for creating creating the unsigned certificate, keys, signing request (CSR) and for the CA entity creating and publishing CRLs, importing, signing certificates and CRLs and key life cycle management.
+The CA is arguably the main part of a PKI. Without trust a secure connection can't be established and CA is the entoty in a PKI which *give* trust to another entity. After trust is verified an encrypted connection may be established taking advantage of *public-key cryptography* using **certificates** for each entity and corresponding **private keys** which never leaves the entities control i.e. only stored on the device it was generated on.
+Each entities certificate is signed by the CA after validating the ownership of the certificate and since every peer trusts the CA they therefore trust the certificates signed by it.
+This *framework* allows users t to create the unsigned certificate, corresponding private keys and signing requests (CSR), which is just a *self-signed* certificate.
 
 ## Certificate Authority (CA)
-A Certified Authority is a body that issues certificates to persons or organizations. The CA signs the certificate thereby authenticating the identity of the requestor. In,Addition,the CA stamps the certificate with an expiration date.The CA may return the certificate to the requesting system and /or post it in a repository.
+A Certified Authority is a body that issues certificates to entities after verifying their identity (correct ownership of the certificate). The CA then signs the certificate thereby authenticating the identity of the requestor. In Addition the CA *stamps* the certificate with an expiration date. The CA may return the certificate to the requesting system and/or post it in a repository.
+The CA entity on uses the PKI tools to create its self-signed certificate for destribution and manages the members (clients and server) certificates life-cycle by signing and revoking them if needed using *Certificate Revokation Lists* (CRLs).
 
 # Encryption and authentication methods
 OpenVPN supports several encryption and authentication methods allowing the client to prove to the server _"he is who he says he is"_ to establish a **secure and trusted VPN tunnel**.
