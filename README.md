@@ -21,7 +21,8 @@ OpenVPN Cryptography
     - [A.10.1.2: Key management](#a1012-key-management)
 - [Conclusion](#conclusion)
   - [CIA Analysis](#cia-analysis)
-- [Source](#source)
+  - [Bottom line](#bottom-line)
+  - [Sources and further material](#sources-and-further-material)
 
 # Introduction
 
@@ -167,9 +168,16 @@ A 9 Business requirements of access control
 To limit access to information and information processing facilities
 
 **13.2.1: Information transfer policies and procedures**
-Objective: To maintain the security of information transferred within an organization and with any external entity      
+Objective: To maintain the security of information transferred within an organization and with any external entity
+> Protect the transfer of information from interception, Copying and/or Modification
+> Use of cryptographic techniques e.g. to protect the Confidentiality, Integrity and Authenticity of information
+
+Through the use of a VPN tunnel and traffic encryption with *perfect forward secrecy* (past sessions can't be decrypted with current key) transmitted data is protected.
 
 **9.1.2 Access to networks and network services**
+> Users should only be provided with access to the network and network services that they have been specifically authorized to use.
+
+Through the use of a VPN tunnel and mandatory authorization to connect no unprivileged users or attackers may access the resource in the secure network.
 
 ## A10 Cryptography controls in 27K:
 Effectively use cryptographic tools
@@ -182,15 +190,27 @@ With:
 - Distribution of keys including the usage
 
 # Conclusion
-Results and CIA analysis
+Results and CIA analysis of project
 
 ## CIA Analysis
 With a weighting of 0-10
 | VPN Encryption                    | Confidentiality | Integrity       | Availability    |
 | --------------------------------- | --------------- | --------------- | --------------- |
-| Using static keys <br>➜ symmetric |    7            |    7            |    9            |
+| Using static keys <br>➜ symmetric |    7            |    7            |    8            |
 | Using Certificates <br>➜ hybrid   |    9            |    9            |    9            |
 
-# Source
+Using **static keys** as with the first version of OpenVPN the **risk** of compromised it higher since loss of keys compromises more data and information may not be detected which could allow traffic interception and/or modification to remain undetected.
+Using **Certificates** on the other hand the *Confidentiality* and *Integrity* is higher via the use of **public-key cryptography and secure key exchange**.
+**Availability** using static keys may be higher because static keys don't expire and no key exchange is required for successfull establishment of the tunnel at the clear cost of security compared to using certificates as with the current version of OpenVPN.
+
+## Bottom line
+OpenVPN a the solution for Virtual Private Network use-cases provides several security features to guarantee adherence to the relevant security controls. Additionally since it is free software and is open-source and security risks may be mitigated faster than proprietary alternatives since **any 3rd-party can audit the code** which is availably publicly and if risks exist or the project gets abandoned its code may be *forked* and maintained by the organization.
+On the other hand free and open-source software may be discontinued without previous announcement and time to prepare and often doesn't offer support compared to proprietary and payed-for solutions with a company.
+The organization employing the VPN software may have to **invest** funds into maintenance and for commercial support, compared to commercial alternative solutions which often include these services.
+In the case of OpenVPN *paid-for* support and solutions for implementation and maintenance are offered.
+In **small organizations** OpenVPN is a good solution but for bigger organizations with higher risks and potential damage more budget may be invested to reduce these risks by going for commercially supported solutions with better support, like *Cisco AnyConnect*.
+
+## Sources and further material
 https://www.lynda.com/SSL-tutorials/Trust-encryption-network/178124/196828-4.html
 https://www.cisco.com/c/en/us/products/security/vpn-endpoint-security-clients/what-is-vpn.html
+https://openvpn.net/community-resources/how-to/#quick
