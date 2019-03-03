@@ -1,7 +1,12 @@
-OpenVPN Cryptography
-====================
+# <p align="center">OpenVPN and Cryptography
 
-- [OpenVPN Cryptography](#openvpn-cryptography)
+Last modified: **2019-03-03**
+
+Version: **1.1 (Export)**
+
+Author: **[Christian Bauer \<cbauer@mail.de\>](mailto:Christian%20Bauer%20%3Ccbauer%40mail.de%3E)**
+
+# Table of Contents
 - [Introduction](#introduction)
 - [Motivation](#motivation)
   - [Information Security in Untrusted networks](#information-security-in-untrusted-networks)
